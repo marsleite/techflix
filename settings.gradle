@@ -1,1 +1,3 @@
 rootProject.name = 'techflix'
+include('domain')
+include('application')
