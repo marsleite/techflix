@@ -30,8 +30,7 @@ jobs:
 
       - name: Extrair Relatório Jacoco
         run: |
-          mkdir -p build/reports/jacoco/test
-          cp -r build/reports/jacoco/test/* build/reports/jacoco/test/
+          cp build/reports/jacoco/test/* build/reports/jacoco/test/
 
       - name: Verificar Cobertura de Código
         run: |
