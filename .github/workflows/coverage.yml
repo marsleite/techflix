@@ -30,7 +30,7 @@ jobs:
 
       - name: Extrair Relatório Jacoco
         run: |
-          cp build/reports/jacoco/test/* build/reports/jacoco/test/
+          cp -r build/reports/jacoco/test/. build/reports/jacoco/test/
 
       - name: Verificar Cobertura de Código
         run: |
