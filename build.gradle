@@ -65,7 +65,7 @@ jacoco {
 
 ext {
     excludedClasses = [
-//            'com/grupo29/techflix/Application*', // Spring Boot application
+            'com/grupo29/techflix/Application*', // Spring Boot application
     ]
 }
 
