@@ -24,9 +24,6 @@ jobs:
         run: |
           ./gradlew clean build
 
-      - name: Run tests and generate Jacoco report
-        run: ./gradlew test jacocoRootReport
-
       - name: Configurar Diretório de Trabalho
         run: cd build/reports/jacoco/test/
 
