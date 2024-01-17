@@ -31,6 +31,14 @@ Bem-vindo ao Sistema de Gestão de Vídeos! Este projeto é uma aplicação back
    ```
 A aplicação estará disponível em http://localhost:8080.
 
+### Executando os Testes
+
+1. Execute os testes com Gradle:
+
+   ```bash
+   ./gradlew clean build
+   ```
+
 ## Endpoints
 
 ### Vídeos
