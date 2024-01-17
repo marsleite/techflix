@@ -33,8 +33,9 @@ jobs:
 
       - name: Verificar Cobertura de Código
         run: |
-          COVERAGE=$(grep -Po '(\d+(?:\.\d+)?(?=%))' jacocoTestReport.xml)
+          COVERAGE=$(grep -Po '(\d+(?:\.\d+)?(?=%))' build/reports/jacoco/test/jacocoTestReport.xml)
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
             echo "A cobertura de código é inferior a 80%. Falha nos testes."
             exit 1
           fi
+      
