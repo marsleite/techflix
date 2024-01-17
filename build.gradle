@@ -71,12 +71,12 @@ ext {
 
 jacocoTestReport {
     description = 'Generates an aggregate report from all subprojects'
-    dependsOn(test)
+    dependsOn(subprojects.test)
 
-    additionalSourceDirs.setFrom(files(sourceSets.main.allSource.srcDirs))
-    sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
-    executionData.setFrom(files(jacocoTestReport.executionData))
-    classDirectories.setFrom(files(sourceSets.main.output))
+    additionalSourceDirs.setFrom(files(subprojects.sourceSets.main.allSource.srcDirs))
+    sourceDirectories.setFrom(files(subprojects.sourceSets.main.allSource.srcDirs))
+    executionData.setFrom(files(subprojects.jacocoTestReport.executionData))
+    classDirectories.setFrom(files(subprojects.sourceSets.main.output))
 
     reports {
         html.required = true
