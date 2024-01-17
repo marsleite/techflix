@@ -1,0 +1,22 @@
+package com.grupo29.techflix.model;
+
+public enum Categoria {
+  COMEDIA,
+  DRAMA,
+  SUSPENSE,
+  TERROR,
+  ACAO,
+  FICCAO,
+  DOCUMENTARIO,
+  ANIMACAO,
+  MUSICAL,
+  ROMANCE,
+  FANTASIA,
+  FAROESTE,
+  GUERRA,
+  HISTORICO,
+  POLICIAL,
+  AVENTURA,
+  INFANTIL,
+  OUTROS
+}

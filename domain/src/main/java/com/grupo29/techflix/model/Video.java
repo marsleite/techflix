@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,6 +16,6 @@ public class Video {
   private String titulo;
   private String descricao;
   private String url;
-  private String categoria;
-  private String dataPublicacao;
+  private Categoria categoria;
+  private LocalDateTime dataPublicacao;
 }
