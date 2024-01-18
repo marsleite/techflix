@@ -33,8 +33,11 @@ subprojects {
     group = 'com.grupo29'
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter")
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
+        implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'io.projectreactor:reactor-test'
     }
@@ -67,6 +70,7 @@ ext {
     excludedClasses = [
             'com/grupo29/techflix/Application*', // Spring Boot application
             'com/grupo29/techflix/model/*', // Spring Boot model
+            'com/grupo29/techflix/resource/repository/*', // Spring Boot repository
     ]
 }
 
