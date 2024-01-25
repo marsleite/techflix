@@ -12,4 +12,8 @@ public interface VideoRepositoryGateway {
   Mono<Video> updateVideo(Video video);
 
   void deleteVideo(Long id);
+
+  Mono<Long> getCountVideos();
+
+  Integer getAverageVisualizacoesVideos();
 }
