@@ -47,13 +47,11 @@ public class CreateVideoUseCaseTest {
         Video video = new Video();
         when(videoRepositoryGateway.getVideoById(any())).thenReturn(Mono.empty());
 
-        // Simulando um erro específico relacionado à criação do vídeo
         when(videoRepositoryGateway.createVideo(any()))
                 .thenReturn(Mono.error(new VideoException("Erro na criação do vídeo")));
 
         StepVerifier.create(createVideoUseCase.execute(video))
                 .expectErrorSatisfies(throwable -> {
-                    // Verificando se a exceção é do tipo esperado e possui a mensagem correta
                     assertTrue(throwable instanceof VideoException);
                     assertEquals("Erro ao criar o vídeo", throwable.getMessage());
                 })
