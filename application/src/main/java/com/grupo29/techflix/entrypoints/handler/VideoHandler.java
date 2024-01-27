@@ -17,14 +17,16 @@ public class VideoHandler {
     }
 
     public Mono<ServerResponse> createVideo(ServerRequest request) {
-        Video video = request.bodyToMono(Video.class).block();
+        return request.bodyToMono(Video.class)
+                .flatMap(video -> {
+                    if (video == null) {
+                        return ServerResponse.badRequest().build();
+                    }
 
-        if (video == null) {
-            return ServerResponse.badRequest().build();
-        }
-
-        Video videoCreated = createVideoUseCase.execute(video).block();
-
-        return ServerResponse.ok().body(Mono.just(videoCreated), Video.class);
+                    return createVideoUseCase.execute(video)
+                            .flatMap(videoCreated ->
+                                    ServerResponse.ok().body(Mono.just(videoCreated), Video.class)
+                            );
+                });
     }
 }

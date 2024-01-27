@@ -16,8 +16,6 @@ public class CreateVideoUseCase {
     public Mono<Video> execute(Video video) {
         return videoRepositoryGateway.getVideoById(video.getId())
                 .switchIfEmpty(videoRepositoryGateway.createVideo(video))
-                .onErrorResume(e -> {
-                    throw new VideoException("Erro ao criar o vídeo", e);
-                });
+                .onErrorResume(e -> Mono.error(new VideoException("Erro ao criar o vídeo", e)));
     }
 }
