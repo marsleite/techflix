@@ -36,7 +36,7 @@ public class VideoHandler {
 
     public Mono<ServerResponse> getVideoById(ServerRequest request) {
         Long requestId = Long.valueOf(request.pathVariable("id"));
-        Video findVideo = findVideoUseCase.execute(requestId).block();
-        return ServerResponse.ok().body(Mono.just(VideoResponse.from(findVideo)), Video.class);
+        return findVideoUseCase.execute(requestId)
+                .flatMap(video -> ServerResponse.ok().body(Mono.just(video), Video.class));
     }
 }
