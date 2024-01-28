@@ -1,6 +1,5 @@
 package com.grupo29.techflix.entrypoints;
 
-import com.grupo29.techflix.entrypoints.dto.VideoResponse;
 import com.grupo29.techflix.exception.VideoException;
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
 import com.grupo29.techflix.integration.IntegrationTest;
@@ -51,7 +50,7 @@ public class VideoHandlerImplTest extends IntegrationTest {
         when(videoRepositoryGateway.createVideo(any(Video.class))).thenReturn(Mono.just(testVideo));
 
         EntityExchangeResult<Video> result = webTestClient.post()
-                .uri("/videos")  // substitua pelo seu endpoint real
+                .uri("/videos")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(testVideo)
                 .exchange()
