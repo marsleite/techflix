@@ -14,11 +14,12 @@ public class UpdateVideoUseCase {
     }
 
     public Mono<Video> execute(Video video, Long id) {
-        return videoRepositoryGateway.getVideoById(id)
-                .switchIfEmpty(Mono.error(new VideoException("Erro ao atualizar o vídeo")))
+        var videoTest = video;
+        var idTest = id;
+        return videoRepositoryGateway.getVideoById(idTest)
                 .flatMap(videoFound -> {
                     video.setId(videoFound.getId());
-                    return videoRepositoryGateway.updateVideo(video);
+                    return videoRepositoryGateway.updateVideo(videoTest);
                 })
                 .onErrorResume(e -> Mono.error(new VideoException("Erro ao atualizar o vídeo", e)));
     }

@@ -31,10 +31,6 @@ public class VideoHandler {
     public Mono<ServerResponse> createVideo(ServerRequest request) {
         return request.bodyToMono(Video.class)
                 .flatMap(video -> {
-                    if (video == null) {
-                        return ServerResponse.badRequest().build();
-                    }
-
                     return createVideoUseCase.execute(video)
                             .flatMap(videoCreated ->
                                     ServerResponse.ok().body(Mono.just(videoCreated), Video.class)
@@ -52,10 +48,6 @@ public class VideoHandler {
         Long requestId = Long.valueOf(request.pathVariable("id"));
         return request.bodyToMono(Video.class)
                 .flatMap(video -> {
-                    if (video == null) {
-                        return ServerResponse.badRequest().build();
-                    }
-
                     return updateVideoUseCase.execute(video, requestId)
                             .flatMap(videoCreated ->
                                     ServerResponse.ok().body(Mono.just(videoCreated), Video.class)
