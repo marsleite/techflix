@@ -33,6 +33,9 @@ public class routes {
                 .andRoute(DELETE("/usuarios/{id}"), usuarioHandler::deleteUsuario)
                 .andRoute(GET("/estatisticas"), estatisticasHandler::getEstatisticas)
                 .andRoute(POST("/usuarios/{idUsuario}/favoritos"), favoritoHandler::adicionarFavorito)
-                .andRoute(DELETE("/usuarios/{idUsuario}/favoritos/{idVideo}"), favoritoHandler::removerFavorito);
+                .andRoute(DELETE("/usuarios/{idUsuario}/favoritos/{idVideo}"), favoritoHandler::removerFavorito)
+                .andRoute(GET("/videos/categoria"), videoHandler::getVideosByCategoria)
+                .andRoute(GET("/videos/titulo"), videoHandler::getVideosByTitulo)
+                .andRoute(GET("/videos"), videoHandler::getAllVideos);
     }
 }
