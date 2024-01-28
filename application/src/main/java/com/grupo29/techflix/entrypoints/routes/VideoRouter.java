@@ -15,6 +15,7 @@ public class VideoRouter {
     @Bean
     public RouterFunction<ServerResponse> route(VideoHandler handler) {
         return RouterFunctions
-                .route(POST("/videos"), handler::createVideo);
+                .route(POST("/videos"), handler::createVideo)
+                .andRoute(GET("/videos/{id}"), handler::getVideoById);
     }
 }
