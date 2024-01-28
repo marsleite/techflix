@@ -6,6 +6,7 @@ import com.grupo29.techflix.gateway.VideoRepositoryGateway;
 import com.grupo29.techflix.integration.IntegrationTest;
 import com.grupo29.techflix.model.Categoria;
 import com.grupo29.techflix.model.Video;
+import com.grupo29.techflix.useCase.DeleteVideoUseCase;
 import com.grupo29.techflix.useCase.FindVideoUseCase;
 import com.grupo29.techflix.useCase.UpdateVideoUseCase;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,9 @@ public class VideoHandlerImplTest extends IntegrationTest {
 
     @MockBean
     private UpdateVideoUseCase updateVideoUseCase;
+
+    @MockBean
+    private DeleteVideoUseCase deleteVideoUseCase;
 
     @Test
     void testCreateVideoHandler() {
@@ -99,5 +103,61 @@ public class VideoHandlerImplTest extends IntegrationTest {
 
         assertThat(videoResponse).isNotNull();
 
+    }
+
+    @Test
+    void shouldDeleteVideoWhenValidId() {
+        Long videoId = 1L;
+        when(deleteVideoUseCase.execute(anyLong())).thenReturn(Mono.empty());
+
+        webTestClient.delete()
+                .uri("/videos/1")
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+    @Test
+    void shouldReturnServerErrorWhenDeleteVideoFails() {
+        Long videoId = 1L;
+        when(deleteVideoUseCase.execute(anyLong())).thenThrow(new VideoException("Error deleting video"));
+
+        webTestClient.delete()
+                .uri("/videos/1")
+                .exchange()
+                .expectStatus().is5xxServerError();
+    }
+
+    @Test
+    void shouldUpdateVideoWhenValidRequest() {
+        Long videoId = 1L;
+        Video video = new Video(/* attributes of the video */);
+        when(updateVideoUseCase.execute(any(), anyLong())).thenReturn(Mono.just(video));
+
+        EntityExchangeResult<Video> result = webTestClient.put()
+                .uri("/videos/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(video)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(Video.class)
+                .returnResult();
+
+        Video videoResponse = result.getResponseBody();
+
+        assertThat(videoResponse).isNotNull();
+    }
+
+    @Test
+    void shouldReturnServerErrorWhenUpdateVideoFails() {
+        Long videoId = 1L;
+        Video video = new Video(/* attributes of the video */);
+        when(updateVideoUseCase.execute(any(), anyLong())).thenThrow(new VideoException("Error updating video"));
+
+        webTestClient.put()
+                .uri("/videos/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(video)
+                .exchange()
+                .expectStatus().is5xxServerError();
     }
 }
