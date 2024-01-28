@@ -1,10 +1,8 @@
 package com.grupo29.techflix.beans;
 
+import com.grupo29.techflix.gateway.UsuarioRepositoryGateway;
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
-import com.grupo29.techflix.useCase.CreateVideoUseCase;
-import com.grupo29.techflix.useCase.DeleteVideoUseCase;
-import com.grupo29.techflix.useCase.FindVideoUseCase;
-import com.grupo29.techflix.useCase.UpdateVideoUseCase;
+import com.grupo29.techflix.useCase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,5 +27,25 @@ public class BeanDomains {
     @Bean
     public DeleteVideoUseCase deleteVideo(VideoRepositoryGateway videoRepositoryGateway) {
         return new DeleteVideoUseCase(videoRepositoryGateway);
+    }
+
+    @Bean
+    public CreateUsuarioUseCase createUsuario(UsuarioRepositoryGateway usuarioRepositoryGateway) {
+        return new CreateUsuarioUseCase(usuarioRepositoryGateway);
+    }
+
+    @Bean
+    public FindUsuarioUseCase getUsuario(UsuarioRepositoryGateway usuarioRepositoryGateway) {
+        return new FindUsuarioUseCase(usuarioRepositoryGateway);
+    }
+
+    @Bean
+    public UpdateUsuarioUseCase updateUsuario(UsuarioRepositoryGateway usuarioRepositoryGateway) {
+        return new UpdateUsuarioUseCase(usuarioRepositoryGateway);
+    }
+
+    @Bean
+    public DeleteUsuarioUseCase deleteUsuario(UsuarioRepositoryGateway usuarioRepositoryGateway) {
+        return new DeleteUsuarioUseCase(usuarioRepositoryGateway);
     }
 }

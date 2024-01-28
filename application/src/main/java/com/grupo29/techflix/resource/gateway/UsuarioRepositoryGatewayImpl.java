@@ -46,7 +46,7 @@ public class UsuarioRepositoryGatewayImpl implements UsuarioRepositoryGateway {
   }
 
   @Override
-  public void deleteUsuario(Long id) {
-    usuarioRepositorySpring.deleteById(id);
+  public Mono<Void> deleteUsuario(Long id) {
+    return usuarioRepositorySpring.deleteById(id);
   }
 }

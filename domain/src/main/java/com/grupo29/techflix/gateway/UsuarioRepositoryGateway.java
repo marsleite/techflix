@@ -10,5 +10,5 @@ public interface UsuarioRepositoryGateway {
 
   Mono<Usuario> updateUsuario(Usuario usuario);
 
-  void deleteUsuario(Long id);
+  Mono<Void> deleteUsuario(Long id);
 }
