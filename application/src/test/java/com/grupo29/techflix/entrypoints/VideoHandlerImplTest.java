@@ -7,6 +7,7 @@ import com.grupo29.techflix.integration.IntegrationTest;
 import com.grupo29.techflix.model.Categoria;
 import com.grupo29.techflix.model.Video;
 import com.grupo29.techflix.useCase.FindVideoUseCase;
+import com.grupo29.techflix.useCase.UpdateVideoUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,6 +28,9 @@ public class VideoHandlerImplTest extends IntegrationTest {
 
     @MockBean
     private FindVideoUseCase findVideoUseCase;
+
+    @MockBean
+    private UpdateVideoUseCase updateVideoUseCase;
 
     @Test
     void testCreateVideoHandler() {
@@ -79,25 +83,21 @@ public class VideoHandlerImplTest extends IntegrationTest {
 
     @Test
     void testGetVideoById() {
-        // Criar um ID de vídeo para o teste
         Long videoId = 1L;
 
-        // Configurar o comportamento do mock para o método execute do FindVideoUseCase
         Video video = new Video(/* atributos do vídeo */);
         when(findVideoUseCase.execute(any())).thenReturn(Mono.just(video));
 
-        // Enviar uma solicitação GET para o endpoint do handler
         EntityExchangeResult<Video> result = webTestClient.get()
-                .uri("/videos/1")  // substitua pelo seu endpoint real
+                .uri("/videos/1")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(Video.class)  // Manter VideoResponse.class
+                .expectBody(Video.class)
                 .returnResult();
 
         Video videoResponse = result.getResponseBody();
 
-        // Agora, você pode realizar as verificações necessárias no videoResponse
         assertThat(videoResponse).isNotNull();
-        // Adicione verificações conforme necessário com base na lógica do seu handler
+
     }
 }
