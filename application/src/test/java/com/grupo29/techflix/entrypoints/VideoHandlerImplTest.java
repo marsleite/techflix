@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-public class VideoHandlerImplTest extends IntegrationTest {
+class VideoHandlerImplTest extends IntegrationTest {
     @Autowired
     private WebTestClient webTestClient;
 

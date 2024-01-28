@@ -1,6 +1,5 @@
 package com.grupo29.techflix.useCase;
 
-import com.grupo29.techflix.exception.UsuarioException;
 import com.grupo29.techflix.gateway.UsuarioRepositoryGateway;
 import com.grupo29.techflix.model.Usuario;
 import org.junit.jupiter.api.BeforeEach;

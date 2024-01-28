@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class UpdateVideoUseCaseTest {
 

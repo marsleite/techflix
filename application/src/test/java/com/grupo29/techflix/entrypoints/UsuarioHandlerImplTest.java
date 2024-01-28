@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 
-public class UsuarioHandlerImplTest extends IntegrationTest {
+class UsuarioHandlerImplTest extends IntegrationTest {
 
     @Autowired
     private WebTestClient webTestClient;

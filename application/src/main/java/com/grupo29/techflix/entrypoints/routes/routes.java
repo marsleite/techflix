@@ -1,5 +1,6 @@
 package com.grupo29.techflix.entrypoints.routes;
 
+import com.grupo29.techflix.entrypoints.handler.EstatisticasHandler;
 import com.grupo29.techflix.entrypoints.handler.UsuarioHandler;
 import com.grupo29.techflix.entrypoints.handler.VideoHandler;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,8 @@ public class routes {
     @Bean
     public RouterFunction<ServerResponse> route(
             VideoHandler videoHandler,
-            UsuarioHandler usuarioHandler
+            UsuarioHandler usuarioHandler,
+            EstatisticasHandler estatisticasHandler
     ) {
         return RouterFunctions
                 .route(POST("/videos"), videoHandler::createVideo)
@@ -26,6 +28,7 @@ public class routes {
                 .andRoute(POST("/usuarios"), usuarioHandler::createUsuario)
                 .andRoute(GET("/usuarios/{id}"), usuarioHandler::getUsuario)
                 .andRoute(PUT("/usuarios/{id}"), usuarioHandler::updateUsuario)
-                .andRoute(DELETE("/usuarios/{id}"), usuarioHandler::deleteUsuario);
+                .andRoute(DELETE("/usuarios/{id}"), usuarioHandler::deleteUsuario)
+                .andRoute(GET("/estatisticas"), estatisticasHandler::getEstatisticas);
     }
 }

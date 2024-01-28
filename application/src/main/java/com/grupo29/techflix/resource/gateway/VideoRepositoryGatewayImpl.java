@@ -52,4 +52,14 @@ public class VideoRepositoryGatewayImpl implements VideoRepositoryGateway {
   public Mono<Void> deleteVideo(Long id) {
     return videoRepositorySpring.deleteById(id);
   }
+
+  @Override
+  public Mono<Long> getCountVideos() {
+    return videoRepositorySpring.count();
+  }
+
+  @Override
+  public Mono<Long> getAverageVisualizacoesVideos() {
+    return videoRepositorySpring.getAvgVisualizacoes();
+  }
 }

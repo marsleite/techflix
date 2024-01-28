@@ -21,4 +21,5 @@ public class Video {
   private String url;
   private Categoria categoria;
   private LocalDateTime dataPublicacao;
+  private Integer visualizacoes;
 }

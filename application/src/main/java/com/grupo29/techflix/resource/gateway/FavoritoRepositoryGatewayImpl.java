@@ -37,4 +37,9 @@ public class FavoritoRepositoryGatewayImpl implements FavoritoRepositoryGateway 
             .map(favoritoEntity -> favoritoEntity.toDomain().getIdUsuario().equals(idUsuario))
             .defaultIfEmpty(false);
   }
+
+  @Override
+  public Mono<Long> getCountFavoritos() {
+    return favoritoRepositorySpring.count();
+  }
 }
