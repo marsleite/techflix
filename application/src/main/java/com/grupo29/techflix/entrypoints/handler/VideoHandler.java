@@ -5,32 +5,20 @@ import com.grupo29.techflix.useCase.CreateVideoUseCase;
 import com.grupo29.techflix.useCase.DeleteVideoUseCase;
 import com.grupo29.techflix.useCase.FindVideoUseCase;
 import com.grupo29.techflix.useCase.UpdateVideoUseCase;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Component
+@AllArgsConstructor
 public class VideoHandler {
 
     private final CreateVideoUseCase createVideoUseCase;
     private final FindVideoUseCase findVideoUseCase;
-
     private final UpdateVideoUseCase updateVideoUseCase;
-
     private final DeleteVideoUseCase deleteVideoUseCase;
-
-    public VideoHandler(
-            CreateVideoUseCase createVideoUseCase,
-            FindVideoUseCase findVideoUseCase,
-            UpdateVideoUseCase updateVideoUseCase,
-            DeleteVideoUseCase deleteVideoUseCase
-    ) {
-        this.createVideoUseCase = createVideoUseCase;
-        this.findVideoUseCase = findVideoUseCase;
-        this.updateVideoUseCase = updateVideoUseCase;
-        this.deleteVideoUseCase = deleteVideoUseCase;
-    }
 
     public Mono<ServerResponse> createVideo(ServerRequest request) {
         return request.bodyToMono(Video.class)

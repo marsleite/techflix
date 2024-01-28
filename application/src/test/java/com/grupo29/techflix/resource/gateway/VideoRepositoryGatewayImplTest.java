@@ -15,100 +15,100 @@ import reactor.test.StepVerifier;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class VideoRepositoryGatewayImplTest {
 
-  @Mock
-  private VideoRepositorySpring videoRepositorySpring;
+    @Mock
+    private VideoRepositorySpring videoRepositorySpring;
 
-  @InjectMocks
-  private VideoRepositoryGatewayImpl videoRepositoryGatewayImpl;
+    @InjectMocks
+    private VideoRepositoryGatewayImpl videoRepositoryGatewayImpl;
 
-  @BeforeEach
-  public void setup() {
-    MockitoAnnotations.openMocks(this);
-  }
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
 
-  @Test
-  public void getVideoByIdReturnsVideo() {
-    var videoEntity = VideoEntity.builder()
-            .id(1L)
-            .titulo("titulo")
-            .descricao("descricao")
-            .url("url")
-            .categoria(Categoria.AVENTURA)
-            .dataPublicacao(LocalDateTime.now())
-            .build();
-    when(videoRepositorySpring.findById(1L)).thenReturn(Mono.just(videoEntity));
+    @Test
+    public void getVideoByIdReturnsVideo() {
+        var videoEntity = VideoEntity.builder()
+                .id(1L)
+                .titulo("titulo")
+                .descricao("descricao")
+                .url("url")
+                .categoria(Categoria.AVENTURA)
+                .dataPublicacao(LocalDateTime.now())
+                .build();
+        when(videoRepositorySpring.findById(1L)).thenReturn(Mono.just(videoEntity));
 
-    var result = videoRepositoryGatewayImpl.getVideoById(1L);
+        var result = videoRepositoryGatewayImpl.getVideoById(1L);
 
-    StepVerifier.create(result)
-            .assertNext(video -> {
-              assert video.getId().equals(1L);
-              assert video.getTitulo().equals("titulo");
-              assert video.getDescricao().equals("descricao");
-              assert video.getUrl().equals("url");
-              assert video.getCategoria().equals(Categoria.AVENTURA);
-            })
-            .verifyComplete();
-  }
+        StepVerifier.create(result)
+                .assertNext(video -> {
+                    assert video.getId().equals(1L);
+                    assert video.getTitulo().equals("titulo");
+                    assert video.getDescricao().equals("descricao");
+                    assert video.getUrl().equals("url");
+                    assert video.getCategoria().equals(Categoria.AVENTURA);
+                })
+                .verifyComplete();
+    }
 
-  @Test
-  public void getVideoByIdReturnsEmptyWhenNotFound() {
-    when(videoRepositorySpring.findById(1L)).thenReturn(Mono.empty());
+    @Test
+    public void getVideoByIdReturnsEmptyWhenNotFound() {
+        when(videoRepositorySpring.findById(1L)).thenReturn(Mono.empty());
 
-    var result = videoRepositoryGatewayImpl.getVideoById(1L);
+        var result = videoRepositoryGatewayImpl.getVideoById(1L);
 
-    StepVerifier.create(result)
-            .verifyComplete();
-  }
+        StepVerifier.create(result)
+                .verifyComplete();
+    }
 
-  @Test
-  public void createVideoReturnsCreatedVideo() {
-    var video = new Video(1L, "titulo", "descricao", "url", Categoria.AVENTURA, LocalDateTime.now());
-    var videoEntity = VideoEntity.fromDomain(video);
-    when(videoRepositorySpring.save(any(VideoEntity.class))).thenReturn(Mono.just(videoEntity));
+    @Test
+    public void createVideoReturnsCreatedVideo() {
+        var video = new Video(1L, "titulo", "descricao", "url", Categoria.AVENTURA, LocalDateTime.now(), 10);
+        var videoEntity = VideoEntity.fromDomain(video);
+        when(videoRepositorySpring.save(any(VideoEntity.class))).thenReturn(Mono.just(videoEntity));
 
-    var result = videoRepositoryGatewayImpl.createVideo(video);
+        var result = videoRepositoryGatewayImpl.createVideo(video);
 
-    StepVerifier.create(result)
-            .assertNext(createdVideo -> {
-              assert createdVideo.getId().equals(video.getId());
-              assert createdVideo.getTitulo().equals(video.getTitulo());
-              assert createdVideo.getDescricao().equals(video.getDescricao());
-              assert createdVideo.getUrl().equals(video.getUrl());
-              assert createdVideo.getCategoria().equals(video.getCategoria());
-            })
-            .verifyComplete();
-  }
+        StepVerifier.create(result)
+                .assertNext(createdVideo -> {
+                    assert createdVideo.getId().equals(video.getId());
+                    assert createdVideo.getTitulo().equals(video.getTitulo());
+                    assert createdVideo.getDescricao().equals(video.getDescricao());
+                    assert createdVideo.getUrl().equals(video.getUrl());
+                    assert createdVideo.getCategoria().equals(video.getCategoria());
+                    assert createdVideo.getVisualizacoes().equals(video.getVisualizacoes());
+                })
+                .verifyComplete();
+    }
 
-  @Test
-  public void updateVideoReturnsUpdatedVideo() {
-    var video = new Video(1L, "updated titulo", "updated descricao", "updated url", Categoria.AVENTURA, LocalDateTime.now());
-    var videoEntity = VideoEntity.fromDomain(video);
-    when(videoRepositorySpring.save(any(VideoEntity.class))).thenReturn(Mono.just(videoEntity));
+    @Test
+    public void updateVideoReturnsUpdatedVideo() {
+        var video = new Video(1L, "updated titulo", "updated descricao", "updated url", Categoria.AVENTURA, LocalDateTime.now(), 10);
+        var videoEntity = VideoEntity.fromDomain(video);
+        when(videoRepositorySpring.save(any(VideoEntity.class))).thenReturn(Mono.just(videoEntity));
 
-    var result = videoRepositoryGatewayImpl.updateVideo(video);
+        var result = videoRepositoryGatewayImpl.updateVideo(video);
 
-    StepVerifier.create(result)
-            .assertNext(updatedVideo -> {
-              assert updatedVideo.getId().equals(video.getId());
-              assert updatedVideo.getTitulo().equals(video.getTitulo());
-              assert updatedVideo.getDescricao().equals(video.getDescricao());
-              assert updatedVideo.getUrl().equals(video.getUrl());
-              assert updatedVideo.getCategoria().equals(video.getCategoria());
-            })
-            .verifyComplete();
-  }
+        StepVerifier.create(result)
+                .assertNext(updatedVideo -> {
+                    assert updatedVideo.getId().equals(video.getId());
+                    assert updatedVideo.getTitulo().equals(video.getTitulo());
+                    assert updatedVideo.getDescricao().equals(video.getDescricao());
+                    assert updatedVideo.getUrl().equals(video.getUrl());
+                    assert updatedVideo.getCategoria().equals(video.getCategoria());
+                    assert updatedVideo.getVisualizacoes().equals(video.getVisualizacoes());
+                })
+                .verifyComplete();
+    }
 
-  @Test
-  public void deleteVideoCallsDeleteById() {
-    videoRepositoryGatewayImpl.deleteVideo(1L);
+    @Test
+    public void deleteVideoCallsDeleteById() {
+        videoRepositoryGatewayImpl.deleteVideo(1L);
 
-    verify(videoRepositorySpring, times(1)).deleteById(1L);
-  }
+        verify(videoRepositorySpring, times(1)).deleteById(1L);
+    }
 }

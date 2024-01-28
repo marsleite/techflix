@@ -59,7 +59,7 @@ public class VideoRepositoryGatewayImpl implements VideoRepositoryGateway {
   }
 
   @Override
-  public Integer getAverageVisualizacoesVideos() {
+  public Mono<Long> getAverageVisualizacoesVideos() {
     return videoRepositorySpring.getAvgVisualizacoes();
   }
 }

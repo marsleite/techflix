@@ -15,6 +15,6 @@ public interface VideoRepositoryGateway {
 
     Mono<Long> getCountVideos();
 
-    Integer getAverageVisualizacoesVideos();
+    Mono<Long> getAverageVisualizacoesVideos();
 
 }

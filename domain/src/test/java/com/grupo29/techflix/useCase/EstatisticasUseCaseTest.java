@@ -1,4 +1,4 @@
-package com.grupo29.techflix.usecase;
+package com.grupo29.techflix.useCase;
 
 import com.grupo29.techflix.gateway.FavoritoRepositoryGateway;
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
@@ -38,12 +38,12 @@ class EstatisticasUseCaseTest {
     @Test
     void deveListarEstatisticas() {
         when(videoRepositoryGateway.getCountVideos()).thenReturn(Mono.just(10L));
-        when(videoRepositoryGateway.getAverageVisualizacoesVideos()).thenReturn(20);
+        when(videoRepositoryGateway.getAverageVisualizacoesVideos()).thenReturn(Mono.just(20L));
         when(favoritoRepositoryGateway.getCountFavoritos()).thenReturn(Mono.just(10L));
 
-        Estatisticas estatisticas = estatisticasUseCase.listarEstatisticas();
+        Estatisticas estatisticas = estatisticasUseCase.execute().block();
 
-        assertThat(estatisticas.getMediaDeVisualizacoes()).isEqualTo(20);
+        assertThat(estatisticas.getMediaDeVisualizacoes()).isEqualTo(20L);
         assertThat(estatisticas.getQuantidadeDeVideos()).isEqualTo(10L);
         assertThat(estatisticas.getQuantidadeDeVideosFavoritados()).isEqualTo(10L);
     }

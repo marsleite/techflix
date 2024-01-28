@@ -5,6 +5,7 @@ import com.grupo29.techflix.useCase.CreateUsuarioUseCase;
 import com.grupo29.techflix.useCase.DeleteUsuarioUseCase;
 import com.grupo29.techflix.useCase.FindUsuarioUseCase;
 import com.grupo29.techflix.useCase.UpdateUsuarioUseCase;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 
 @Component
+@AllArgsConstructor
 public class UsuarioHandler {
 
     private final CreateUsuarioUseCase createUsuarioUseCase;
@@ -23,18 +25,6 @@ public class UsuarioHandler {
     private final UpdateUsuarioUseCase updateUsuarioUseCase;
 
     private final DeleteUsuarioUseCase deleteUsuarioUseCase;
-
-    public UsuarioHandler(
-            CreateUsuarioUseCase createUsuarioUseCase,
-            FindUsuarioUseCase findUsuarioUseCase,
-            UpdateUsuarioUseCase updateUsuarioUseCase,
-            DeleteUsuarioUseCase deleteUsuarioUseCase
-    ) {
-        this.createUsuarioUseCase = createUsuarioUseCase;
-        this.findUsuarioUseCase = findUsuarioUseCase;
-        this.updateUsuarioUseCase = updateUsuarioUseCase;
-        this.deleteUsuarioUseCase = deleteUsuarioUseCase;
-    }
 
     public Mono<ServerResponse> createUsuario(ServerRequest request) {
         Mono<Usuario> usuarioMono = request.bodyToMono(Usuario.class);

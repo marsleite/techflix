@@ -1,5 +1,6 @@
 package com.grupo29.techflix.beans;
 
+import com.grupo29.techflix.gateway.FavoritoRepositoryGateway;
 import com.grupo29.techflix.gateway.UsuarioRepositoryGateway;
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
 import com.grupo29.techflix.useCase.*;
@@ -47,5 +48,11 @@ public class BeanDomains {
     @Bean
     public DeleteUsuarioUseCase deleteUsuario(UsuarioRepositoryGateway usuarioRepositoryGateway) {
         return new DeleteUsuarioUseCase(usuarioRepositoryGateway);
+    }
+
+    @Bean
+    public EstatisticasUseCase getEstatisticas(VideoRepositoryGateway videoRepositoryGateway,
+                                            FavoritoRepositoryGateway favoritoRepositoryGateway) {
+        return new EstatisticasUseCase(videoRepositoryGateway, favoritoRepositoryGateway);
     }
 }
