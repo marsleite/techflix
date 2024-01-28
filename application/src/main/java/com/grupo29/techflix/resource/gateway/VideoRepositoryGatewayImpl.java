@@ -49,8 +49,8 @@ public class VideoRepositoryGatewayImpl implements VideoRepositoryGateway {
   }
 
   @Override
-  public void deleteVideo(Long id) {
-    videoRepositorySpring.deleteById(id);
+  public Mono<Void> deleteVideo(Long id) {
+    return videoRepositorySpring.deleteById(id);
   }
 
   @Override

@@ -18,6 +18,7 @@ dependencies {
 
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock:4.1.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 application {

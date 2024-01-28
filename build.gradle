@@ -40,6 +40,7 @@ subprojects {
         implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'io.projectreactor:reactor-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     }
 
     test {
@@ -71,6 +72,8 @@ ext {
             'com/grupo29/techflix/Application*', // Spring Boot application
             'com/grupo29/techflix/model/*', // Spring Boot model
             'com/grupo29/techflix/resource/repository/*', // Spring Boot repository
+            'com/grupo29/techflix/beans/*',
+            'com/grupo29/techflix/entrypoints/dto/*',
     ]
 }
 

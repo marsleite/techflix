@@ -8,3 +8,9 @@ tasks {
     jar { enabled = true }
     bootJar { enabled = false }
 }
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
