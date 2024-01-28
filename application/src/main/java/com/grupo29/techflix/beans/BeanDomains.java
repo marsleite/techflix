@@ -65,4 +65,9 @@ public class BeanDomains {
     public RemoveFavoritoUseCase removerFavorito(FavoritoRepositoryGateway favoritoRepositoryGateway) {
         return new RemoveFavoritoUseCase(favoritoRepositoryGateway);
     }
+
+    @Bean
+    public FiltrosUseCase filtrosUseCase(VideoRepositoryGateway videoRepositoryGateway) {
+        return new FiltrosUseCase(videoRepositoryGateway);
+    }
 }
