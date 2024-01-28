@@ -1,11 +1,13 @@
 package com.grupo29.techflix.resource.gateway;
 
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
+import com.grupo29.techflix.model.Categoria;
 import com.grupo29.techflix.model.Video;
 import com.grupo29.techflix.resource.repository.entity.VideoEntity;
 import com.grupo29.techflix.resource.repository.spring.VideoRepositorySpring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
@@ -61,5 +63,24 @@ public class VideoRepositoryGatewayImpl implements VideoRepositoryGateway {
   @Override
   public Mono<Long> getAverageVisualizacoesVideos() {
     return videoRepositorySpring.getAvgVisualizacoes();
+  }
+
+  @Override
+  public Flux<Video> getVideosByCategoria(Categoria categoria) {
+    String categoriaString = categoria.toString();
+    return videoRepositorySpring.findAllByCategoria(categoriaString)
+            .flatMap(videoEntity -> Mono.just(videoEntity.toDomain()));
+  }
+
+  @Override
+  public Flux<Video> getVideosByTitulo(String titulo) {
+    return videoRepositorySpring.findAllByTitulo(titulo)
+            .flatMap(videoEntity -> Mono.just(videoEntity.toDomain()));
+  }
+
+  @Override
+  public Flux<Video> getAllVideos() {
+    return videoRepositorySpring.findAll()
+            .flatMap(videoEntity -> Mono.just(videoEntity.toDomain()));
   }
 }

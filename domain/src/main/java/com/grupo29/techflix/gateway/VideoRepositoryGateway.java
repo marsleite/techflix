@@ -1,6 +1,8 @@
 package com.grupo29.techflix.gateway;
 
+import com.grupo29.techflix.model.Categoria;
 import com.grupo29.techflix.model.Video;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface VideoRepositoryGateway {
@@ -16,5 +18,11 @@ public interface VideoRepositoryGateway {
     Mono<Long> getCountVideos();
 
     Mono<Long> getAverageVisualizacoesVideos();
+
+    Flux<Video> getVideosByCategoria(Categoria categoria);
+
+    Flux<Video> getVideosByTitulo(String titulo);
+
+    Flux<Video> getAllVideos();
 
 }
