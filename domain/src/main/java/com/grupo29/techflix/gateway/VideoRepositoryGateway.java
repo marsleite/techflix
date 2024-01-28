@@ -11,5 +11,5 @@ public interface VideoRepositoryGateway {
 
   Mono<Video> updateVideo(Video video);
 
-  void deleteVideo(Long id);
+  Mono<Void> deleteVideo(Long id);
 }

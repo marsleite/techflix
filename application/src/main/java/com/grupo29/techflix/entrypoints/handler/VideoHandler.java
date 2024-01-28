@@ -1,8 +1,8 @@
 package com.grupo29.techflix.entrypoints.handler;
 
-import com.grupo29.techflix.entrypoints.dto.VideoResponse;
 import com.grupo29.techflix.model.Video;
 import com.grupo29.techflix.useCase.CreateVideoUseCase;
+import com.grupo29.techflix.useCase.DeleteVideoUseCase;
 import com.grupo29.techflix.useCase.FindVideoUseCase;
 import com.grupo29.techflix.useCase.UpdateVideoUseCase;
 import org.springframework.stereotype.Component;
@@ -18,14 +18,18 @@ public class VideoHandler {
 
     private final UpdateVideoUseCase updateVideoUseCase;
 
+    private final DeleteVideoUseCase deleteVideoUseCase;
+
     public VideoHandler(
             CreateVideoUseCase createVideoUseCase,
             FindVideoUseCase findVideoUseCase,
-            UpdateVideoUseCase updateVideoUseCase
+            UpdateVideoUseCase updateVideoUseCase,
+            DeleteVideoUseCase deleteVideoUseCase
     ) {
         this.createVideoUseCase = createVideoUseCase;
         this.findVideoUseCase = findVideoUseCase;
         this.updateVideoUseCase = updateVideoUseCase;
+        this.deleteVideoUseCase = deleteVideoUseCase;
     }
 
     public Mono<ServerResponse> createVideo(ServerRequest request) {
@@ -53,5 +57,11 @@ public class VideoHandler {
                                     ServerResponse.ok().body(Mono.just(videoCreated), Video.class)
                             );
                 });
+    }
+
+    public Mono<ServerResponse> deleteVideo(ServerRequest request) {
+        Long requestId = Long.valueOf(request.pathVariable("id"));
+        deleteVideoUseCase.execute(requestId);
+        return ServerResponse.ok().build();
     }
 }
