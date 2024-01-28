@@ -55,4 +55,14 @@ public class BeanDomains {
                                             FavoritoRepositoryGateway favoritoRepositoryGateway) {
         return new EstatisticasUseCase(videoRepositoryGateway, favoritoRepositoryGateway);
     }
+
+    @Bean
+    public AddFavoritoUseCase adicionarFavorito(FavoritoRepositoryGateway favoritoRepositoryGateway) {
+        return new AddFavoritoUseCase(favoritoRepositoryGateway);
+    }
+
+    @Bean
+    public RemoveFavoritoUseCase removerFavorito(FavoritoRepositoryGateway favoritoRepositoryGateway) {
+        return new RemoveFavoritoUseCase(favoritoRepositoryGateway);
+    }
 }
