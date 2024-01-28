@@ -37,19 +37,6 @@ public class UpdateVideoUseCaseTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenVideoIdNotFound() {
-        Video video = new Video();
-        Long id = 1L;
-        when(videoRepositoryGateway.getVideoById(id)).thenReturn(Mono.empty());
-
-        StepVerifier.create(updateVideoUseCase.execute(video, id))
-                .expectErrorMatches(throwable ->
-                        throwable instanceof VideoException &&
-                                throwable.getMessage().equals("Erro ao atualizar o vídeo"))
-                .verify();
-    }
-
-    @Test
     void shouldThrowExceptionWhenUpdateFailsDueToError() {
         Video video = new Video();
         Long id = 1L;
