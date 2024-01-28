@@ -3,6 +3,7 @@ package com.grupo29.techflix.beans;
 import com.grupo29.techflix.gateway.VideoRepositoryGateway;
 import com.grupo29.techflix.useCase.CreateVideoUseCase;
 import com.grupo29.techflix.useCase.FindVideoUseCase;
+import com.grupo29.techflix.useCase.UpdateVideoUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,5 +18,10 @@ public class BeanDomains {
     @Bean
     public FindVideoUseCase getvideo(VideoRepositoryGateway videoRepositoryGateway) {
         return new FindVideoUseCase(videoRepositoryGateway);
+    }
+
+    @Bean
+    public UpdateVideoUseCase updateVideo(VideoRepositoryGateway videoRepositoryGateway) {
+        return new UpdateVideoUseCase(videoRepositoryGateway);
     }
 }

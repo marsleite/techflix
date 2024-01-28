@@ -16,6 +16,7 @@ public class VideoRouter {
     public RouterFunction<ServerResponse> route(VideoHandler handler) {
         return RouterFunctions
                 .route(POST("/videos"), handler::createVideo)
-                .andRoute(GET("/videos/{id}"), handler::getVideoById);
+                .andRoute(GET("/videos/{id}"), handler::getVideoById)
+                .andRoute(PUT("/videos/{id}"), handler::updateVideo);
     }
 }
